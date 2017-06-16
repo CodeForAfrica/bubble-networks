@@ -1,0 +1,42 @@
+{
+  "name": "Boilerplate",
+  "title": "Emma Lewis",
+  "version": "0.1.0",
+  "description": "Emma Lewis Gulp ES6 Front End Boilerplate",
+  "contributors": [
+    "Emma Lewis"
+  ],
+  "company": "Emma Lewis Limited",
+  "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-eslint": "^6.0.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
+    "countup.js": "^1.7.1",
+    "csv-parser": "^1.11.0",
+    "del": "^2.2.0",
+    "fs": "0.0.2",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-compile-handlebars": "^0.6.1",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-eslint": "^2.0.0",
+    "gulp-handlebars": "^4.0.0",
+    "gulp-pixrem": "^1.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-streamify": "^1.0.2",
+    "gulp-uglify": "^1.5.3",
+    "gulp-util": "^3.0.7",
+    "gulp-webserver": "^0.9.1",
+    "topojson-client": "^3.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "d3": "^4.2.2",
+    "jquery": "^3.0.0",
+    "topojson": "^3.0.0"
+  }
+}

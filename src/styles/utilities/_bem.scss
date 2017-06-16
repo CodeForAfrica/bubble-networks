@@ -1,0 +1,61 @@
+// -----------------------------------------------------------------------------
+// BEM
+// -----------------------------------------------------------------------------
+
+
+// Options
+// -----------------------------------------------------------------------------
+
+$bem-element-separator: '__' !default;
+$bem-modifier-separator: '--' !default;
+
+
+// Block (New)
+// -----------------------------------------------------------------------------
+
+@mixin new($name, $description: '') {
+    @if $description != '' {
+        $description: ': ' + $description;
+    }
+
+    @at-root {
+        /* #{$name}#{$description} */
+        .#{$name} {
+            @content;
+        }
+    }
+}
+
+
+// Element (Has)
+// -----------------------------------------------------------------------------
+
+@mixin has($name) {
+    $selector: nth(#{&}, 1);
+
+    @if str-index($selector, $bem-element-separator) {
+        @error '#{$selector} is already an element';
+    }
+
+    &#{$bem-element-separator}#{$name} {
+        @content;
+    }
+}
+
+
+// Modifier (When)
+// -----------------------------------------------------------------------------
+
+@mixin when($name) {
+    $selector: nth(#{&}, 1);
+
+    @if str-index(#{&}, $bem-modifier-separator) {
+        @error '#{$selector} is already modified';
+    }
+
+    // Add the modifier and rules
+    &#{$bem-modifier-separator}#{$name} {
+        @extend #{$selector};
+        @content;
+    }
+}

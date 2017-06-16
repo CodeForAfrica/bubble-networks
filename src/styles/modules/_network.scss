@@ -1,0 +1,327 @@
+.network {
+    overflow: hidden;
+    padding: 0 rem(70);
+
+    @media (max-width: 62.5em) {
+        padding: 0 rem(20);
+    }
+
+    @include has('key') {
+        margin-top: rem(30);
+        text-align: center;
+
+        @include bp(em(850)) {
+            margin-bottom: rem(20);
+        }
+    }
+
+    @include has('key-item') {
+        border: 1px solid transparent;
+        border-radius: rem(30);
+        display: inline-block;
+        font-size: rem(18);
+        height: rem(18);
+        line-height: rem(18);
+        margin-left: rem(12.5);
+        margin-right: rem(12.5);
+        padding: rem(5) rem(20) rem(5) rem(5);
+        transition: all 350ms;
+
+        .network__key-circle {
+            border-radius: 50%;
+            content: "";
+            display: block;
+            float: left;
+            height: rem(18);
+            margin-right: rem(18);
+            transition: background 350ms;
+            width: rem(18);
+        }
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: $white;
+            cursor: pointer;
+            text-decoration: underline;
+
+            .network__key-circle {
+                background: $white;
+            }
+        }
+
+        &.active {
+            color: $white;
+
+            &:hover,
+            &:active,
+            &:focus {
+                cursor: default;
+                text-decoration: none;
+            }
+
+            .network__key-circle {
+                background: $white;
+            }
+        }
+
+        @include bp(em(720)) {
+            display: block;
+            margin: 0 auto rem(10);
+            width: rem(220);
+        }
+    }
+
+    &__container {
+        overflow: hidden;
+        position: relative;
+    }
+
+    &__entries {
+        overflow: hidden;
+    }
+
+    &__instruction {
+        font-size: rem(22);
+        font-weight: bold;
+        line-height: rem(26);
+        margin: rem(20) 0;
+        transition: opacity 350ms;
+
+        &.hide {
+            opacity: 0;
+        }
+    }
+
+    &__entry {
+        float: left;
+        height: rem(22);
+        padding-bottom: 6.666%;
+        pointer-events: all;
+        position: relative;
+        transition: opacity 350ms;
+        width: 6.666%;
+
+        &:hover,
+        &:active,
+        &:focus {
+            cursor: pointer;
+        }
+
+        &.active, &.hide, &.linked {
+            &:hover,
+            &:active,
+            &:focus {
+                cursor: default;
+            }
+        }
+
+        &:nth-child(15n + 1) {
+            clear: both;
+        }
+
+        @media (max-width: 62.5em) {
+            padding-bottom: 10%;
+            width: 10%;
+
+            &:nth-child(15n + 1) {
+                clear: none;
+            }
+
+            &:nth-child(10n + 1) {
+                clear: both;
+            }
+        }
+
+        @media (max-width: 46em) {
+            padding-bottom: 20%;
+            width: 20%;
+
+            &:nth-child(5n + 1) {
+                clear: both;
+            }
+        }
+    }
+
+    &__name {
+        display: block;
+        font-size: rem(12);
+        font-weight: bold;
+        margin: rem(5) rem(5) 0;
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+        text-overflow: ellipsis;
+        transition: opacity 350ms;
+        white-space: nowrap;
+        z-index: 1;
+
+        .hide & {
+            opacity: 0;
+        }
+
+        .linked & {
+            opacity: 1;
+        }
+
+        .active & {
+            display: none;
+        }
+    }
+
+    &__count {
+        display: block;
+        font-size: rem(10);
+        font-weight: 300;
+        opacity: 0;
+        position: relative;
+        text-align: center;
+        transition: opacity 350ms;
+
+        .linked & {
+            opacity: 1;
+        }
+    }
+
+    &__sending, &__receiving {
+        border-radius: 50%;
+        display: block;
+        height: 0;
+        left: 50%;
+        margin-top: rem(11);
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        transition: all 500ms;
+        width: 0;
+    }
+
+    &__active {
+        box-sizing: border-box;
+        display: none;
+        left: 0;
+        line-height: 1;
+        overflow: hidden;
+        padding: rem(46) rem(70) rem(20);
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 100%;
+        z-index: 5;
+
+        &.active {
+            display: block;
+        }
+
+        @media (max-width: 62.5em) {
+            padding: rem(20);
+        }
+    }
+
+    &__active__wrapper {
+        float: left;
+
+        @media (max-width: 62.5em) {
+            float: none;
+            margin-bottom: rem(10);
+        }
+    }
+
+    &__active__name {
+        display: block;
+        float: left;
+        font-size: rem(27);
+        font-weight: bold;
+        line-height: rem(32);
+
+        @media (max-width: 46em) {
+            float: none;
+            padding-right: rem(55);
+        }
+    }
+
+    &__active__total {
+        clear: both;
+        display: block;
+        font-size: rem(23);
+        line-height: rem(28);
+    }
+
+    &__active__close {
+        background: url('../../img/icon-close.svg') center/60% no-repeat;
+        border: 1px solid transparent;
+        border-radius: 50%;
+        display: block;
+        float: left;
+        height: rem(25);
+        margin-left: rem(60);
+        margin-top: rem(1);
+        transition: border-color 350ms;
+        width: rem(25);
+
+        &:hover,
+        &:active,
+        &:focus {
+            border-color: black;
+            cursor: pointer;
+        }
+
+        @media (max-width: 46em) {
+            position: absolute;
+            right: rem(20);
+            top: rem(20);
+        }
+    }
+
+    &__legend {
+        float: right;
+        line-height: rem(32);
+
+        @media (max-width: 62.5em) {
+            float: none;
+            line-height: 1;
+        }
+    }
+
+    &__legend-item {
+        display: inline-block;
+        font-size: rem(18);
+        height: rem(18);
+        line-height: rem(18);
+        margin-right: rem(25);
+
+        .network__legend-circle {
+            border-radius: 50%;
+            content: "";
+            display: block;
+            float: left;
+            height: rem(18);
+            margin-right: rem(18);
+            width: rem(18);
+        }
+
+        @media (max-width: 62.5em) {
+            margin-bottom: rem(5);
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    &__svg, &__canvas-container {
+        bottom: 0;
+        height: 100%;
+        left: 0;
+        pointer-events: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    &__canvas-container canvas {
+        transform: scale(0.5, 0.5);
+        transform-origin: 0 0;
+    }
+}
