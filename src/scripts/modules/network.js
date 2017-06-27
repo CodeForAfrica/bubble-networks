@@ -192,12 +192,22 @@ class Network {
         this.$entries.off('mouseleave')
         this.$entries.off('click.select')
         
+        const $activeCountry = $(`#entry-${id}`)
         const modeString = this.mode === 0 ? 'receiving' : 'sending'
+        const linkedIds = $activeCountry.data(modeString).toString().split(',')
+        const linkedValues = $activeCountry.data(`${modeString}Values`).toString().split(',')
+
         this.$activeName.text($entry.data('name'))
         if (this.mode === 0) {
-            this.$activeTotal.text($entry.data('totalSent'))
+            let activeTotalText = `${this.$network.data('textBeforeTotal')[0]} ${$entry.data('totalSent')} `
+            activeTotalText += $entry.data('totalSent') > 1 ? this.$network.data('textAfterTotal')[0] : this.$network.data('textAfterTotalSingular')[0]
+            activeTotalText += linkedIds.length > 1 ? ` ${linkedIds.length} ${this.$network.data('nodeTypeText')}` : ` ${linkedIds.length} ${this.$network.data('nodeTypeTextSingular')}`
+            this.$activeTotal.text(activeTotalText)
         } else {
-            this.$activeTotal.text($entry.data('totalReceived'))
+            let activeTotalText = `${this.$network.data('textBeforeTotal')[1]} ${$entry.data('totalReceived')} `
+            activeTotalText += $entry.data('totalSent') > 1 ? this.$network.data('textAfterTotal')[1] : this.$network.data('textAfterTotalSingular')[1]
+            activeTotalText += linkedIds.length > 1 ? ` ${linkedIds.length} ${this.$network.data('nodeTypeText')}` : ` ${linkedIds.length} ${this.$network.data('nodeTypeTextSingular')}`
+            this.$activeTotal.text(activeTotalText)
         }
         this.$active.addClass('active')
         this.$instructions.addClass('hide')
@@ -206,10 +216,6 @@ class Network {
                 'width': 0,
                 'height': 0
             })
-        const $activeCountry = $(`#entry-${id}`)
-        
-        const linkedIds = $activeCountry.data(modeString).toString().split(',')
-        const linkedValues = $activeCountry.data(`${modeString}Values`).toString().split(',')
         
         $.each(linkedIds, (index, entryId) => {
             const $linkedCountry = $(`#entry-${entryId}`)
