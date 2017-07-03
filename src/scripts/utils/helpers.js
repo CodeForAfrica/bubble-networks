@@ -15,4 +15,10 @@ function hexToRGB(hex, alpha = 1) {
     return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')'
 }
 
-export default hexToRGB
+function numberWithCommas(x) {
+    var parts = x.toString().split('.')
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    return parts.join('.')
+}
+
+export { hexToRGB, numberWithCommas }

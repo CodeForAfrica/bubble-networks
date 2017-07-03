@@ -1,12 +1,13 @@
 import $                                from 'jquery'
 import data                             from '../data/network.json'
+import { numberWithCommas }             from '../utils/helpers'
 
 class Network {
     constructor() {
         this.$network = $('.network')
         this.$key = $('<div class="network__key"></div>').appendTo('.network')
         this.$keyItems = null
-        this.$instructions = $(`<div class="network__instruction">${this.$network.data('instructions')}</div>`).appendTo('.network')
+        this.$instructions = $(`<div class="network__instruction">${this.$network.data('instructions') || ''}</div>`).appendTo('.network')
         this.$active = $('<div class="network__active"></div>').appendTo('.network')
         this.$container = $('<div class="network__container"></div>').appendTo('.network')
         this.$entryContainer = null
@@ -66,13 +67,13 @@ class Network {
     }
 
     addMarkup() {
-        const keys = this.$network.data('keys')
+        const keys = 2
         const titles = this.$network.data('keyTitles')
-        this.colors = this.$network.data('keyColors')
-        this.colorsHover = this.$network.data('keyColorsHover') || this.colors
-        this.useSvg = this.$network.data('svg')
-        this.colorLines = this.$network.data('colorLines')
-        this.colorLinesHover = this.$network.data('colorLinesHover')
+        this.colors = this.$network.data('keyColors') || ['#2353aa','#ae7ea2']
+        this.colorsHover = this.$network.data('keyColorsSelected') || ['#0c2e6d','#901772']
+        this.useSvg = this.$network.data('svg') ? this.$network.data('svg') : false
+        this.colorLines = this.$network.data('colorLines') || '#d8d8d8'
+        this.colorLinesHover = this.$network.data('colorLinesHover') || '#a5a5a5'
         this.background = this.$network.data('colorBackground') || '#EAEAEA'
         this.$network.css('background', this.background)
         this.$active.css('background', this.background)
@@ -199,12 +200,12 @@ class Network {
 
         this.$activeName.text($entry.data('name'))
         if (this.mode === 0) {
-            let activeTotalText = `${this.$network.data('textBeforeTotal')[0]} ${$entry.data('totalSent')} `
+            let activeTotalText = `${this.$network.data('textBeforeTotal')[0]} ${numberWithCommas($entry.data('totalSent'))} `
             activeTotalText += $entry.data('totalSent') > 1 ? this.$network.data('textAfterTotal')[0] : this.$network.data('textAfterTotalSingular')[0]
             activeTotalText += linkedIds.length > 1 ? ` ${linkedIds.length} ${this.$network.data('nodeTypeText')}` : ` ${linkedIds.length} ${this.$network.data('nodeTypeTextSingular')}`
             this.$activeTotal.text(activeTotalText)
         } else {
-            let activeTotalText = `${this.$network.data('textBeforeTotal')[1]} ${$entry.data('totalReceived')} `
+            let activeTotalText = `${this.$network.data('textBeforeTotal')[1]} ${numberWithCommas($entry.data('totalReceived'))} `
             activeTotalText += $entry.data('totalSent') > 1 ? this.$network.data('textAfterTotal')[1] : this.$network.data('textAfterTotalSingular')[1]
             activeTotalText += linkedIds.length > 1 ? ` ${linkedIds.length} ${this.$network.data('nodeTypeText')}` : ` ${linkedIds.length} ${this.$network.data('nodeTypeTextSingular')}`
             this.$activeTotal.text(activeTotalText)

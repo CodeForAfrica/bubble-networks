@@ -1,7 +1,7 @@
 import $                                from 'jquery'
 import * as d3                          from 'd3'
 import Network                          from './network'
-import hexToRGB                         from '../utils/helpers'
+import { hexToRGB }                     from '../utils/helpers'
 import throttle                         from '../utils/throttle'
 
 class NetworkCanvas extends Network {

@@ -86,6 +86,7 @@
         font-weight: bold;
         line-height: rem(26);
         margin: rem(20) 0;
+        min-height: rem(26);
         transition: opacity 350ms;
 
         &.hide {
@@ -96,11 +97,11 @@
     &__entry {
         float: left;
         height: rem(22);
-        padding-bottom: 6.666%;
+        padding-bottom: 5%;
         pointer-events: all;
         position: relative;
         transition: opacity 350ms;
-        width: 6.666%;
+        width: 5%;
 
         &:hover,
         &:active,
@@ -116,8 +117,22 @@
             }
         }
 
-        &:nth-child(15n + 1) {
+        &:nth-child(20n + 1) {
             clear: both;
+        }
+
+
+        @media (max-width: 75em) {
+            padding-bottom: 6.666%;
+            width: 6.666%;
+
+            &:nth-child(20n + 1) {
+                clear: none;
+            }
+
+            &:nth-child(15n + 1) {
+                clear: both;
+            }
         }
 
         @media (max-width: 62.5em) {
@@ -192,6 +207,7 @@
         position: absolute;
         top: 50%;
         transform: translate(-50%, -50%);
+        transform-style: preserve-3d;
         transition: all 500ms;
         width: 0;
     }

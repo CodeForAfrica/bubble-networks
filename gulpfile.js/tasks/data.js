@@ -92,16 +92,16 @@ function sortData(data) {
 
 module.exports = {
     sort: function() {
-        fs.stat(join(config.scripts.src, 'data/transactions.json'), function(err, stat) {
+        fs.stat(join(config.scripts.src, 'data/data.json'), function(err, stat) {
             if(err == null) {
-                fs.readFile(join(config.scripts.src, 'data/transactions.json'), 'utf8', function(err, data) {
+                fs.readFile(join(config.scripts.src, 'data/data.json'), 'utf8', function(err, data) {
                     data = JSON.parse(data);
                     
                     sortData(data)
                 });
             } else {
                 var csvData = [];
-                fs.createReadStream(join(config.scripts.src, 'data/transactions.csv'))
+                fs.createReadStream(join(config.scripts.src, 'data/data.csv'))
                     .pipe(csv())
                     .on('data', function (data) {
                         csvData.push(data);
