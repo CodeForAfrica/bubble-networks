@@ -18,7 +18,6 @@ gulp.task('scripts:bundle', ['scripts:lint'], scripts.bundle);
 gulp.task('styles', styles);
 
 gulp.task('data:sort', data.sort)
-gulp.task('data:treemaps', data.treemaps)
 
 gulp.task('watch', watch);
 
@@ -31,4 +30,4 @@ gulp.task('webserver', webserver);
 
 gulp.task('default', ['watch', 'webserver']);
 
-gulp.task('data', ['data:sort', 'data:treemaps']);
+gulp.task('data', ['data:sort']);

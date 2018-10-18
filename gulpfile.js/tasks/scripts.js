@@ -7,7 +7,7 @@ var config		 = require('../config');
 var errorHandler = require('../utilities/errorHandler');
 var uglify 		 = require('gulp-uglify');
 var streamify	 = require('gulp-streamify');
-var gutil 		 = require('gulp-util');
+var through2 		 = require('through2');
 var join         = require('path').join;
 var eslint 		 = require('gulp-eslint');
 
@@ -21,12 +21,12 @@ module.exports = {
     	// map them to our stream function
     	var tasks = files.map(function(entry) {
         	return browserify({ debug: true, entries: join(config.scripts.src, entry) })
-				.transform(babelify, {presets: ['es2015']})
+				.transform(babelify, {presets: ["@babel/preset-env"]})
 				.require(join(config.scripts.src, entry), { entry: true })
 				.bundle()
 				.on('error', errorHandler)
 				.pipe(source(join(config.scripts.dist, 'network-map.min.js')))
-				.pipe(config.production ? streamify(uglify()) : gutil.noop())
+				.pipe(config.production ? streamify(uglify()) : through2.obj())
 		    	.pipe(gulp.dest('./'));
         	})
     	// create a merged stream
