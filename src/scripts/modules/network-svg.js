@@ -4,11 +4,12 @@ import Netowrk                          from './network'
 import throttle                         from '../utils/throttle.js'
 
 class NetworkSvg extends Netowrk {
-    constructor() {
+    constructor(data) {
         super()
         // this.$container = $('.network__countries')
         this.svg = null
         this.lines = null
+        this.data = data
     }
 
     init() {
@@ -84,8 +85,8 @@ class NetworkSvg extends Netowrk {
                 return d.to === id || (d.from === id && d.bilateral)
             }
         })
-        .raise()
-        .transition()
+            .raise()
+            .transition()
             .duration(350)
             .attr('stroke', this.colorLinesHover)
     }
@@ -94,19 +95,19 @@ class NetworkSvg extends Netowrk {
         this.$circles.css('background', this.colors[this.mode])
         this.lines
             .transition()
-                .duration(350)
-                .attr('opacity', (d) => {
-                    if (this.mode === 0) {
+            .duration(350)
+            .attr('opacity', (d) => {
+                if (this.mode === 0) {
+                    return 1
+                } else {
+                    if (d.bilateral) {
                         return 1
                     } else {
-                        if (d.bilateral) {
-                            return 1
-                        } else {
-                            return 0
-                        }
+                        return 0
                     }
-                })
-                .attr('stroke', this.colorLines)
+                }
+            })
+            .attr('stroke', this.colorLines)
     }
 
     mouseEvents() {
@@ -133,8 +134,8 @@ class NetworkSvg extends Netowrk {
                     }
                 })
                 .transition()
-                    .duration(350)
-                    .attr('opacity', 0)
+                .duration(350)
+                .attr('opacity', 0)
 
             
             this.lines
@@ -146,9 +147,9 @@ class NetworkSvg extends Netowrk {
                     }
                 })
                 .transition()
-                    .duration(350)
-                    .attr('opacity', 1)
-                    .attr('stroke', this.colorLines)
+                .duration(350)
+                .attr('opacity', 1)
+                .attr('stroke', this.colorLines)
 
             this.$active.on('click.deselect', () => {
                 this.deselect()
@@ -167,9 +168,9 @@ class NetworkSvg extends Netowrk {
 
         this.lines
             .transition()
-                .duration(350)
-                .attr('opacity', 1)
-                .attr('stroke', this.colorLines)
+            .duration(350)
+            .attr('opacity', 1)
+            .attr('stroke', this.colorLines)
                 
         this.mouseEvents()
     }

@@ -5,11 +5,12 @@ import { hexToRGB }                     from '../utils/helpers'
 import throttle                         from '../utils/throttle'
 
 class NetworkCanvas extends Network {
-    constructor() {
+    constructor(data) {
         super()
         this.canvas = null
         this.customBase = null
         this.custom = null
+        this.data = data
     }
 
     init() {

@@ -1,5 +1,4 @@
 import $                                from 'jquery'
-import data                             from '../data/network.json'
 import { numberWithCommas }             from '../utils/helpers'
 
 class Network {
@@ -32,6 +31,7 @@ class Network {
         this.colors = null
         this.colorsHover = null
         this.background = null
+        this.data = null
     }
 
     init() {
@@ -107,7 +107,7 @@ class Network {
     }
 
     addEntries() {
-        $.each(data, (index, entry) => {
+        $.each(this.data, (index, entry) => {
             const $entryDiv = $(`<div><span class="network__name">${entry.name}</span><span class="network__count"></span><span class="network__sending" style="background: ${this.colors[0]}"></span></div>`)
             $entryDiv.addClass('network__entry')
             $entryDiv.attr('id', 'entry-' + entry.id)
@@ -166,17 +166,17 @@ class Network {
             this.maxTotal = entry.total_received > this.maxTotal ? entry.total_received : this.maxTotal
 
             this.$entryContainer.append($entryDiv)    
-        })
+        })    
 
         this.$entries = $('.network__entry')
-        this.$circles = $('.network__sending')
+        this.$circles = $('.network__sending')        
     }
 
     calculateSizes() {
         this.entryWidth = this.$entries.first().outerWidth()
         this.entryHeight = this.$entries.first().outerHeight()
 
-        $.each(data, (index, entry) => {
+        $.each(this.data, (index, entry) => {
             const $entry = $(`#entry-${entry.id}`)
             const sendingWidth = this.entryWidth * Math.sqrt($entry.data('totalSent') / this.maxTotal)
             $entry.find('.network__sending').css({
